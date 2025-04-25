@@ -9,18 +9,27 @@ import {
   Divider,
   useMediaQuery,
   useTheme,
-  List,
-  ListItem,
+  Button,
 } from "@mui/material"
-import { Facebook, Twitter, Instagram, LinkedIn, Phone, Email, LocationOn, ElectricBolt } from "@mui/icons-material"
+import { Facebook, Twitter, Instagram, LinkedIn, ElectricBolt } from "@mui/icons-material"
 
 const Footer = () => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down("md"))
 
   return (
-    <Box sx={{ bgcolor: "primary.main", color: "white", pt: 6, pb: 3 }}>
-      <Container maxWidth={false} disableGutters={true}>
+    <Box
+      sx={{
+        backgroundImage:
+          "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/placeholder.svg?height=800&width=1600)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        color: "white",
+        pt: 6,
+        pb: 3,
+      }}
+    >
+      <Container maxWidth="lg">
         <Grid container spacing={4}>
           {/* Company Info */}
           <Grid item xs={12} md={4}>
@@ -47,93 +56,6 @@ const Footer = () => {
               <IconButton color="inherit" aria-label="LinkedIn" size="small" sx={{ bgcolor: "rgba(255,255,255,0.1)" }}>
                 <LinkedIn />
               </IconButton>
-            </Box>
-          </Grid>
-
-          {/* Quick Links */}
-          <Grid item xs={12} sm={6} md={2}>
-            <Typography variant="h6" component="div" sx={{ mb: 2, fontWeight: "bold" }}>
-              Hızlı Erişim
-            </Typography>
-            <List dense disablePadding>
-              <ListItem disablePadding>
-                <Link href="#" color="inherit" underline="hover">
-                  Ana Sayfa
-                </Link>
-              </ListItem>
-              <ListItem disablePadding>
-                <Link href="#" color="inherit" underline="hover">
-                  Hizmetlerimiz
-                </Link>
-              </ListItem>
-              <ListItem disablePadding>
-                <Link href="#" color="inherit" underline="hover">
-                  Projeler
-                </Link>
-              </ListItem>
-              <ListItem disablePadding>
-                <Link href="#" color="inherit" underline="hover">
-                  Kurumsal
-                </Link>
-              </ListItem>
-              <ListItem disablePadding>
-                <Link href="#" color="inherit" underline="hover">
-                  İletişim
-                </Link>
-              </ListItem>
-            </List>
-          </Grid>
-
-          {/* Services */}
-          <Grid item xs={12} sm={6} md={2}>
-            <Typography variant="h6" component="div" sx={{ mb: 2, fontWeight: "bold" }}>
-              Hizmetlerimiz
-            </Typography>
-            <List dense disablePadding>
-              <ListItem disablePadding>
-                <Link href="#" color="inherit" underline="hover">
-                  Elektrik Tesisatı
-                </Link>
-              </ListItem>
-              <ListItem disablePadding>
-                <Link href="#" color="inherit" underline="hover">
-                  Enerji Danışmanlığı
-                </Link>
-              </ListItem>
-              <ListItem disablePadding>
-                <Link href="#" color="inherit" underline="hover">
-                  Bakım ve Onarım
-                </Link>
-              </ListItem>
-              <ListItem disablePadding>
-                <Link href="#" color="inherit" underline="hover">
-                  Yenilenebilir Enerji
-                </Link>
-              </ListItem>
-              <ListItem disablePadding>
-                <Link href="#" color="inherit" underline="hover">
-                  Aydınlatma Çözümleri
-                </Link>
-              </ListItem>
-            </List>
-          </Grid>
-
-          {/* Contact Info */}
-          <Grid item xs={12} md={4}>
-            <Typography variant="h6" component="div" sx={{ mb: 2, fontWeight: "bold" }}>
-              İletişim Bilgileri
-            </Typography>
-            <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-              <LocationOn sx={{ mr: 1 }} />
-              <Typography variant="body2">Elektrik Caddesi, No:123, Enerji Plaza, Kat:4, İstanbul</Typography>
-            </Box>
-            <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-              <Phone sx={{ mr: 1 }} />
-              <Typography variant="body2">+90 (212) 123 45 67</Typography>
-            </Box>
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Email sx={{ mr: 1 }} />
-              <Typography variant="body2">info@elektrikfirmasi.com</Typography>
             </Box>
           </Grid>
         </Grid>

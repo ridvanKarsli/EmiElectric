@@ -1,7 +1,9 @@
 #root {
-  margin: 0 auto; /* Ortalamak için */
-  padding: 0; /* Padding'i kaldırarak boşlukları ortadan kaldırıyoruz */
+  width: 100%; /* Tam genişlik */
+  margin: 0 auto;
+  padding: 0;
   text-align: center;
+  box-sizing: border-box; /* Güvenli ölçü */
 }
 
 .logo {

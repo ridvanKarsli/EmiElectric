@@ -1,44 +1,46 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  :root {
-    --primary-color: #1976d2;
-    --secondary-color: #f5b700;
-    --dark-color: #333;
-    --light-color: #f4f4f4;
-    --danger-color: #dc3545;
-    --success-color: #28a745;
-  }
-  
-  body {
-    font-family: "Roboto", sans-serif;
-    line-height: 1.6;
-    background-color: #f8f9fa;
-    color: #333;
-  }
-  
-  a {
-    text-decoration: none;
-    color: var(--primary-color);
-  }
-  
-  .container {
-    width: 100%;
-    max-width: 100%; /* Bu sayede tam ekran genişliğinde olur */
-    margin: 0 auto;
-    padding: 0 15px;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #1976d2;
+  --secondary-color: #f5b700;
+  --dark-color: #333;
+  --light-color: #f4f4f4;
+  --danger-color: #dc3545;
+  --success-color: #28a745;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  line-height: 1.6;
+  background-color: #f8f9fa;
+  color: #333;
+  margin: 0; /* Güvenli ölçü */
+  padding: 0; /* Güvenli ölçü */
+  width: 100%; /* Tam genişlik */
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+.container {
+  width: 100%;
+  max-width: 100%; /* Tam genişlik */
+  margin: 0 auto;
+  padding: 0; /* Yan boşlukları kaldır */
+}
+
+.section {
+  padding: 60px 0;
+}
+
+@media (max-width: 768px) {
   .section {
-    padding: 60px 0;
+    padding: 40px 0;
   }
-  
-  @media (max-width: 768px) {
-    .section {
-      padding: 40px 0;
-    }
-  }
-  
+}
