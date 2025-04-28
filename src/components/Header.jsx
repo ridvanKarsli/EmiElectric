@@ -25,8 +25,10 @@ import {
   ExpandMore,
   ExpandLess,
 } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 const pages = ["Ana Sayfa", "Kurumsal", "Ürünler", "İletişim"];
+const hrefs = ["/", "yok", "/products", "yok"];
 const corporateMenu = [
   "Hakkımızda",
   "Tarihçe",
@@ -35,6 +37,15 @@ const corporateMenu = [
   "Karbon Ayak İzi",
   "Kalite",
   "AR-GE",
+];
+const corporateHrefs = [
+  "/about",
+  "/history",
+  "/certificates",
+  "/social-responsibility",
+  "/carbon-footprint",
+  "/quality",
+  "/research-development",
 ];
 
 const Header = () => {
@@ -60,7 +71,7 @@ const Header = () => {
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
-    setOpenCorporateMenu(false); // Close corporate menu when drawer toggles
+    setOpenCorporateMenu(false);
   };
 
   const drawer = (
@@ -77,8 +88,8 @@ const Header = () => {
         <Typography
           variant="h6"
           noWrap
-          component="a"
-          href="/"
+          component={Link}
+          to="/"
           sx={{
             fontFamily: "monospace",
             fontWeight: 700,
@@ -90,43 +101,57 @@ const Header = () => {
         </Typography>
       </Box>
       <List>
-        {pages.map((page) => (
+        {pages.map((page, index) => (
           <Box key={page}>
-            <ListItem disablePadding>
-              <ListItemButton
-                onClick={page === "Kurumsal" ? handleOpenCorporateMenu : handleDrawerToggle}
-                sx={{
-                  textAlign: "center",
-                  "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
-                }}
-              >
-                <ListItemText primary={page} />
-                {page === "Kurumsal" && (
-                  <>{openCorporateMenu ? <ExpandLess /> : <ExpandMore />}</>
-                )}
-              </ListItemButton>
-            </ListItem>
-            {page === "Kurumsal" && (
-              <Collapse in={openCorporateMenu} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                  {corporateMenu.map((item) => (
-                    <ListItem key={item} disablePadding>
-                      <ListItemButton
-                        sx={{
-                          pl: 4,
-                          textAlign: "center",
-                          "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
-
-
-                        }}
-                        onClick={handleDrawerToggle}
-                      >
-                        <ListItemText primary={item} />
-                      </ListItemButton>
-                    </ListItem>
-                  ))}
-                </List>
-              </Collapse>
+            {page !== "Kurumsal" ? (
+              <ListItem disablePadding>
+                <ListItemButton
+                  component={hrefs[index] !== "yok" ? Link : "button"}
+                  to={hrefs[index] !== "yok" ? hrefs[index] : undefined}
+                  onClick={handleDrawerToggle}
+                  sx={{
+                    textAlign: "center",
+                    "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
+                  }}
+                >
+                  <ListItemText primary={page} />
+                </ListItemButton>
+              </ListItem>
+            ) : (
+              <>
+                <ListItem disablePadding>
+                  <ListItemButton
+                    onClick={handleOpenCorporateMenu}
+                    sx={{
+                      textAlign: "center",
+                      "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
+                    }}
+                  >
+                    <ListItemText primary={page} />
+                    {openCorporateMenu ? <ExpandLess /> : <ExpandMore />}
+                  </ListItemButton>
+                </ListItem>
+                <Collapse in={openCorporateMenu} timeout="auto" unmountOnExit>
+                  <List component="div" disablePadding>
+                    {corporateMenu.map((item, idx) => (
+                      <ListItem key={item} disablePadding>
+                        <ListItemButton
+                          component={Link}
+                          to={corporateHrefs[idx]}
+                          onClick={handleDrawerToggle}
+                          sx={{
+                            pl: 4,
+                            textAlign: "center",
+                            "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
+                          }}
+                        >
+                          <ListItemText primary={item} />
+                        </ListItemButton>
+                      </ListItem>
+                    ))}
+                  </List>
+                </Collapse>
+              </>
             )}
           </Box>
         ))}
@@ -149,8 +174,8 @@ const Header = () => {
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="/"
+            component={Link}
+            to="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -163,7 +188,7 @@ const Header = () => {
             EMI ELEKTRIK
           </Typography>
 
-          {/* Mobile menu */}
+          {/* Mobil menü */}
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -191,13 +216,13 @@ const Header = () => {
             </Drawer>
           </Box>
 
-          {/* Mobile logo */}
+          {/* Mobil logo */}
           <ElectricBolt sx={{ display: { xs: "flex", md: "none" }, mr: 1, color: "white" }} />
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href="/"
+            component={Link}
+            to="/"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -211,12 +236,14 @@ const Header = () => {
             ELEKTRIK
           </Typography>
 
-          {/* Desktop menu */}
+          {/* Masaüstü menü */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, justifyContent: "center" }}>
-            {pages.map((page) =>
+            {pages.map((page, index) =>
               page !== "Kurumsal" ? (
                 <Button
                   key={page}
+                  component={hrefs[index] !== "yok" ? Link : "button"}
+                  to={hrefs[index] !== "yok" ? hrefs[index] : undefined}
                   onClick={handleCloseCorporateMenu}
                   sx={{
                     my: 2,
@@ -258,9 +285,11 @@ const Header = () => {
                       },
                     }}
                   >
-                    {corporateMenu.map((item) => (
+                    {corporateMenu.map((item, idx) => (
                       <MenuItem
                         key={item}
+                        component={Link}
+                        to={corporateHrefs[idx]}
                         onClick={handleCloseCorporateMenu}
                         sx={{
                           "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },

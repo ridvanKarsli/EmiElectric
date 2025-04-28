@@ -10,6 +10,11 @@ const FeatureCard = ({ icon, title, description }) => {
         textAlign: "center",
         borderRadius: 4,
         boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
+        transition: "all 0.3s ease",  // Smooth transition
+        "&:hover": {
+          boxShadow: "0 8px 40px rgba(0, 0, 0, 0.1)", // Less intense shadow
+          transform: "scale(1.05)", // Slightly scale up, but not too much
+        },
       }}
     >
       <Box
