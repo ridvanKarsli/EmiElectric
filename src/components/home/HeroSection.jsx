@@ -5,13 +5,13 @@ const HeroSection = () => {
     <Box
       sx={{
         backgroundImage:
-          "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/placeholder.svg?height=800&width=1600)",
+          "linear-gradient(rgba(30, 42, 56, 0.7), rgba(30, 42, 56, 0.7)), url(/placeholder.svg?height=800&width=1600)",
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: { xs: "70vh", md: "80vh" },
         display: "flex",
         alignItems: "center",
-        color: "white",
+        color: "#f5f5f5", // Açık zemin yazı rengi
       }}
     >
       <Container maxWidth="lg">
@@ -24,6 +24,7 @@ const HeroSection = () => {
                 fontWeight: "bold",
                 mb: 2,
                 fontSize: { xs: "2.5rem", md: "3.5rem" },
+                color: "#f5f5f5",
               }}
             >
               Profesyonel Elektrik Çözümleri
@@ -33,6 +34,7 @@ const HeroSection = () => {
               sx={{
                 mb: 4,
                 fontSize: { xs: "1.2rem", md: "1.5rem" },
+                color: "#f5f5f5",
               }}
             >
               20 yılı aşkın deneyimimizle elektrik sektöründe güvenilir çözümler sunuyoruz.
@@ -46,13 +48,14 @@ const HeroSection = () => {
                   px: 4,
                   py: 1.5,
                   fontSize: "1rem",
-                  backgroundColor: "#dc004e", // Theme yerine doğrudan renk kodu
+                  backgroundColor: "#f7941d", // Turuncu
+                  color: "white",
                   "&:hover": {
-                    backgroundColor: "#9b0034", // Hover durumunda farklı bir renk
+                    backgroundColor: "#1e2a38", // Koyu lacivert
                   },
                 }}
               >
-                    Hakkımızda
+                Hakkımızda
               </Button>
               <Button
                 variant="outlined"
@@ -62,11 +65,10 @@ const HeroSection = () => {
                   px: 4,
                   py: 1.5,
                   fontSize: "1rem",
-                  borderColor: "white",
-                  color: "white",
+                  borderColor: "#f5f5f5",
+                  color: "#f5f5f5",
                   "&:hover": {
-                    borderColor: "white",
-                    backgroundColor: "rgba(255,255,255,0.1)",
+                    backgroundColor: "rgba(255, 255, 255, 0.1)",
                   },
                 }}
               >

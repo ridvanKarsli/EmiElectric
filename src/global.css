@@ -5,10 +5,10 @@
 }
 
 :root {
-  --primary-color: #1976d2;
-  --secondary-color: #f5b700;
-  --dark-color: #333;
-  --light-color: #f4f4f4;
+  --primary-color: #f7941d;       /* Turuncu - Logo yazı rengi */
+  --secondary-color: #1e2a38;     /* Koyu lacivert - Alt zemin tonu */
+  --light-color: #f5f5f5;         /* Açık gri / beyazımsı zemin */
+  --dark-color: #1e2a38;          /* Ana koyu renk - header/footer */
   --danger-color: #dc3545;
   --success-color: #28a745;
 }
@@ -16,11 +16,11 @@
 body {
   font-family: "Roboto", sans-serif;
   line-height: 1.6;
-  background-color: #f8f9fa;
-  color: #333;
-  margin: 0; /* Güvenli ölçü */
-  padding: 0; /* Güvenli ölçü */
-  width: 100%; /* Tam genişlik */
+  background-color: var(--light-color);
+  color: var(--dark-color);
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 a {
@@ -30,9 +30,9 @@ a {
 
 .container {
   width: 100%;
-  max-width: 100%; /* Tam genişlik */
+  max-width: 100%;
   margin: 0 auto;
-  padding: 0; /* Yan boşlukları kaldır */
+  padding: 0;
 }
 
 .section {

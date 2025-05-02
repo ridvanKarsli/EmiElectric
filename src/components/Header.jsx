@@ -78,12 +78,14 @@ const Header = () => {
     <Box
       sx={{
         textAlign: "center",
-        backgroundImage: "linear-gradient(to right, #dc004e, #9b0034)",
+        backgroundColor: "#f7941d",
         height: "100%",
         color: "white",
+        p: 2,
+        borderRadius: "0 16px 16px 0",
       }}
     >
-      <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", p: 2 }}>
+      <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", mb: 2 }}>
         <ElectricBolt sx={{ color: "white", mr: 1 }} />
         <Typography
           variant="h6"
@@ -111,6 +113,9 @@ const Header = () => {
                   onClick={handleDrawerToggle}
                   sx={{
                     textAlign: "center",
+                    borderRadius: "30px",
+                    mx: 1,
+                    my: 0.5,
                     "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
                   }}
                 >
@@ -124,6 +129,9 @@ const Header = () => {
                     onClick={handleOpenCorporateMenu}
                     sx={{
                       textAlign: "center",
+                      borderRadius: "30px",
+                      mx: 1,
+                      my: 0.5,
                       "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
                     }}
                   >
@@ -142,6 +150,9 @@ const Header = () => {
                           sx={{
                             pl: 4,
                             textAlign: "center",
+                            borderRadius: "30px",
+                            mx: 1,
+                            my: 0.5,
                             "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
                           }}
                         >
@@ -163,14 +174,17 @@ const Header = () => {
     <AppBar
       position="sticky"
       sx={{
-        backgroundImage: "linear-gradient(to right, #dc004e, #9b0034)",
+        backgroundColor: "#f7941d",
         color: "white",
-        boxShadow: 2,
+        boxShadow: 3,
+        borderRadius: { xs: 0, md: "0 0 24px 24px" }, // Oval alt köşeler
+        mx: { xs: 0, md: 2 },
+        mt: { xs: 0, md: 1 },
       }}
     >
       <Container maxWidth="lg">
         <Toolbar disableGutters>
-          <ElectricBolt sx={{ display: { xs: "none", md: "flex" }, mr: 1, color: "white" }} />
+          <ElectricBolt sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -192,7 +206,6 @@ const Header = () => {
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
-              aria-label="menu"
               onClick={handleDrawerToggle}
               color="inherit"
             >
@@ -208,7 +221,9 @@ const Header = () => {
                 "& .MuiDrawer-paper": {
                   boxSizing: "border-box",
                   width: 260,
-                  backgroundImage: "linear-gradient(to right, #dc004e, #9b0034)",
+                  backgroundColor: "#f7941d",
+                  borderRadius: "0 16px 16px 0",
+                  m: 1,
                 },
               }}
             >
@@ -217,7 +232,7 @@ const Header = () => {
           </Box>
 
           {/* Mobil logo */}
-          <ElectricBolt sx={{ display: { xs: "flex", md: "none" }, mr: 1, color: "white" }} />
+          <ElectricBolt sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -247,9 +262,14 @@ const Header = () => {
                   onClick={handleCloseCorporateMenu}
                   sx={{
                     my: 2,
-                    color: "white",
                     mx: 1,
-                    "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
+                    px: 3,
+                    color: "white",
+                    borderRadius: "30px",
+                    textTransform: "none",
+                    "&:hover": {
+                      backgroundColor: "rgba(255, 255, 255, 0.1)",
+                    },
                   }}
                 >
                   {page}
@@ -258,15 +278,18 @@ const Header = () => {
                 <Box key={page} sx={{ position: "relative" }}>
                   <Button
                     onClick={handleOpenCorporateMenu}
+                    endIcon={<ArrowDropDown />}
                     sx={{
                       my: 2,
-                      color: "white",
-                      display: "flex",
-                      alignItems: "center",
                       mx: 1,
-                      "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
+                      px: 3,
+                      color: "white",
+                      borderRadius: "30px",
+                      textTransform: "none",
+                      "&:hover": {
+                        backgroundColor: "rgba(255, 255, 255, 0.1)",
+                      },
                     }}
-                    endIcon={<ArrowDropDown />}
                   >
                     {page}
                   </Button>
@@ -274,14 +297,14 @@ const Header = () => {
                     id="menu-corporate"
                     anchorEl={anchorElCorporate}
                     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-                    keepMounted
                     transformOrigin={{ vertical: "top", horizontal: "left" }}
                     open={Boolean(anchorElCorporate)}
                     onClose={handleCloseCorporateMenu}
                     sx={{
                       "& .MuiPaper-root": {
-                        backgroundColor: "#9b0034",
+                        backgroundColor: "#1e2a38",
                         color: "white",
+                        borderRadius: "16px",
                       },
                     }}
                   >
@@ -292,7 +315,10 @@ const Header = () => {
                         to={corporateHrefs[idx]}
                         onClick={handleCloseCorporateMenu}
                         sx={{
-                          "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
+                          borderRadius: "30px",
+                          "&:hover": {
+                            backgroundColor: "rgba(255, 255, 255, 0.1)",
+                          },
                         }}
                       >
                         <Typography textAlign="center">{item}</Typography>

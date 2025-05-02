@@ -8,9 +8,10 @@ const ContactForm = () => {
         p: { xs: 3, md: 5 },
         borderRadius: 4,
         boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
-        backgroundColor: "white",
+        backgroundColor: "#ffffff",
         maxWidth: "600px",
         margin: "0 auto",
+        border: "1px solid #f7941d", // turuncu çerçeve vurgusu
       }}
     >
       <Typography
@@ -21,13 +22,22 @@ const ContactForm = () => {
           mb: 4,
           textAlign: "center",
           fontSize: { xs: "1.75rem", md: "2rem" },
-          color: "text.primary",
+          color: "#1e2a38", // koyu başlık
         }}
       >
         İletişim Formu
       </Typography>
 
-      <Box component="form" noValidate autoComplete="off" sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+      <Box
+        component="form"
+        noValidate
+        autoComplete="off"
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 3,
+        }}
+      >
         <TextField
           fullWidth
           label="Ad Soyad"
@@ -69,9 +79,10 @@ const ContactForm = () => {
             py: 1.5,
             fontSize: "1rem",
             alignSelf: "center",
-            backgroundColor: "#dc004e",
+            backgroundColor: "#f7941d", // logodaki turuncu
+            color: "#fff",
             "&:hover": {
-              backgroundColor: "#9b0034",
+              backgroundColor: "#1e2a38", // koyu lacivert hover
             },
           }}
         >

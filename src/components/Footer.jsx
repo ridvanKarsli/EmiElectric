@@ -9,7 +9,6 @@ import {
   Divider,
   useMediaQuery,
   useTheme,
-  Button,
 } from "@mui/material"
 import { Facebook, Twitter, Instagram, LinkedIn, ElectricBolt } from "@mui/icons-material"
 
@@ -20,11 +19,8 @@ const Footer = () => {
   return (
     <Box
       sx={{
-        backgroundImage:
-          "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/placeholder.svg?height=800&width=1600)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        color: "white",
+        backgroundColor: "#1e2a38", // koyu lacivert zemin
+        color: "#f5f5f5",           // açık gri yazılar
         pt: 6,
         pb: 3,
       }}
@@ -34,8 +30,8 @@ const Footer = () => {
           {/* Company Info */}
           <Grid item xs={12} md={4}>
             <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-              <ElectricBolt sx={{ mr: 1, fontSize: 30 }} />
-              <Typography variant="h5" component="div" sx={{ fontWeight: "bold" }}>
+              <ElectricBolt sx={{ mr: 1, fontSize: 30, color: "#f7941d" }} />
+              <Typography variant="h5" component="div" sx={{ fontWeight: "bold", color: "#f7941d" }}>
                 ELEKTRIK
               </Typography>
             </Box>
@@ -44,23 +40,25 @@ const Footer = () => {
               Müşteri memnuniyeti ve kaliteli hizmet anlayışımızla her zaman yanınızdayız.
             </Typography>
             <Box sx={{ display: "flex", gap: 1 }}>
-              <IconButton color="inherit" aria-label="Facebook" size="small" sx={{ bgcolor: "rgba(255,255,255,0.1)" }}>
-                <Facebook />
-              </IconButton>
-              <IconButton color="inherit" aria-label="Twitter" size="small" sx={{ bgcolor: "rgba(255,255,255,0.1)" }}>
-                <Twitter />
-              </IconButton>
-              <IconButton color="inherit" aria-label="Instagram" size="small" sx={{ bgcolor: "rgba(255,255,255,0.1)" }}>
-                <Instagram />
-              </IconButton>
-              <IconButton color="inherit" aria-label="LinkedIn" size="small" sx={{ bgcolor: "rgba(255,255,255,0.1)" }}>
-                <LinkedIn />
-              </IconButton>
+              {[Facebook, Twitter, Instagram, LinkedIn].map((Icon, index) => (
+                <IconButton
+                  key={index}
+                  color="inherit"
+                  aria-label={Icon.name}
+                  size="small"
+                  sx={{
+                    bgcolor: "rgba(255,255,255,0.08)",
+                    "&:hover": { bgcolor: "#f7941d", color: "#1e2a38" },
+                  }}
+                >
+                  <Icon />
+                </IconButton>
+              ))}
             </Box>
           </Grid>
         </Grid>
 
-        <Divider sx={{ my: 3, borderColor: "rgba(255,255,255,0.2)" }} />
+        <Divider sx={{ my: 3, borderColor: "rgba(255,255,255,0.1)" }} />
 
         <Box
           sx={{
@@ -72,7 +70,7 @@ const Footer = () => {
           }}
         >
           <Typography variant="body2" sx={{ mb: isMobile ? 1 : 0 }}>
-            &copy; {new Date().getFullYear()} Elektrik Firması. Tüm hakları saklıdır.
+            &copy; {new Date().getFullYear()} EMI Elektrik. Tüm hakları saklıdır.
           </Typography>
           <Box sx={{ display: "flex", gap: 2 }}>
             <Link href="#" color="inherit" underline="hover" variant="body2">
