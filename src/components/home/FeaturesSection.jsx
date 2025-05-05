@@ -62,8 +62,10 @@ const FeaturesSection = () => {
               bgcolor: "rgba(30, 42, 56, 0.05)",
               color: "#F7941D",
               borderRadius: "9999px",
-              fontWeight: 600,
-              fontSize: { xs: "1.25rem", md: "1.5rem" },
+              fontWeight: 700,
+              fontSize: { xs: "1.2rem", md: "1.5rem", lg: "2rem" },
+              letterSpacing: 2,
+              textTransform: "uppercase",
             }}
           >
             NEDEN BİZİ SEÇMELİSİNİZ

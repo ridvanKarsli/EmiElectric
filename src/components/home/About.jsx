@@ -39,73 +39,7 @@ const AboutSection = () => {
 
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 10 }}>
         <Grid container spacing={6} alignItems="center">
-          {/* Left side - Image */}
-          <Grid item xs={12} lg={6}>
-            <Box sx={{ position: "relative" }}>
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: "-1rem",
-                  left: "-1rem",
-                  width: "6rem",
-                  height: "6rem",
-                  bgcolor: "#F7941D",
-                  borderTopLeftRadius: "1.5rem",
-                  zIndex: 0,
-                }}
-              />
-              <Box
-                component="img"
-                src="/placeholder.svg?height=600&width=800"
-                alt="EMI Elektrik Ekibi"
-                sx={{
-                  width: "100%",
-                  height: { xs: "300px", md: "500px" },
-                  objectFit: "cover",
-                  borderRadius: 4,
-                  boxShadow: 8,
-                  position: "relative",
-                  zIndex: 1,
-                }}
-              />
-              <Box
-                sx={{
-                  position: "absolute",
-                  bottom: "-1rem",
-                  right: "-1rem",
-                  width: "6rem",
-                  height: "6rem",
-                  bgcolor: "#1E2A38",
-                  borderBottomRightRadius: "1.5rem",
-                  zIndex: 0,
-                }}
-              />
-
-              <Paper
-                elevation={6}
-                sx={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)",
-                  bgcolor: "rgba(255, 255, 255, 0.9)",
-                  backdropFilter: "blur(4px)",
-                  p: 3,
-                  borderRadius: 4,
-                  zIndex: 2,
-                  width: "10rem",
-                  textAlign: "center",
-                }}
-              >
-                <Typography variant="h4" sx={{ fontWeight: "bold", color: "#1E2A38", mb: 1 }}>
-                  20+ Yıl
-                </Typography>
-                <Typography variant="body2" sx={{ color: "#4A4A4A" }}>
-                  Sektör Deneyimi
-                </Typography>
-              </Paper>
-            </Box>
-          </Grid>
+          
 
           {/* Right side - Content */}
           <Grid item xs={12} lg={6}>
@@ -118,8 +52,10 @@ const AboutSection = () => {
                 bgcolor: "rgba(30, 42, 56, 0.1)",
                 color: "#F7941D",
                 borderRadius: "9999px",
-                fontSize: "0.875rem",
-                fontWeight: 600,
+                fontSize: { xs: "1.2rem", md: "1.5rem", lg: "2rem" },
+                fontWeight: 700,
+                letterSpacing: 2,
+                textTransform: "uppercase",
               }}
             >
               HAKKIMIZDA
@@ -127,11 +63,13 @@ const AboutSection = () => {
             <Typography
               variant="h3"
               sx={{
-                fontSize: { xs: "1.75rem", md: "2.25rem", lg: "2.5rem" },
+                fontSize: { xs: "2.2rem", md: "2.5rem", lg: "3rem" },
                 fontWeight: 700,
                 mb: 2,
                 color: "#1E2A38",
                 lineHeight: 1.2,
+                letterSpacing: 2,
+                textTransform: "uppercase",
               }}
             >
               Elektrik Sektöründe{" "}

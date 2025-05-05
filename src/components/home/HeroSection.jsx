@@ -55,8 +55,10 @@ const HeroSection = () => {
               bgcolor: "#F7941D",
               color: "white",
               borderRadius: "9999px",
-              fontSize: "0.875rem",
-              fontWeight: 500,
+              fontSize: { xs: "1.2rem", md: "1.5rem", lg: "2rem" },
+              fontWeight: 700,
+              letterSpacing: 2,
+              textTransform: "uppercase",
             }}
           >
             20 Yıllık Deneyim
@@ -64,10 +66,12 @@ const HeroSection = () => {
           <Typography
             variant="h1"
             sx={{
-              fontSize: { xs: "2.5rem", md: "3.5rem", lg: "4.5rem" },
+              fontSize: { xs: "2.2rem", md: "2.5rem", lg: "3rem" },
               fontWeight: 700,
               mb: 3,
               lineHeight: 1.2,
+              letterSpacing: 2,
+              textTransform: "uppercase",
             }}
           >
             Profesyonel{" "}
@@ -84,6 +88,7 @@ const HeroSection = () => {
               opacity: 0.9,
               lineHeight: 1.6,
               maxWidth: "42rem",
+              color: "#1E2A38",
             }}
           >
             Sektördeki deneyimimiz ve uzman ekibimizle elektrik alanında güvenilir, yenilikçi ve sürdürülebilir çözümler
@@ -102,6 +107,9 @@ const HeroSection = () => {
                 backgroundColor: "#F7941D",
                 color: "#FFFFFF",
                 boxShadow: 3,
+                fontWeight: 700,
+                letterSpacing: 1,
+                textTransform: "uppercase",
                 "&:hover": {
                   backgroundColor: "#e68100",
                   boxShadow: 6,
@@ -121,12 +129,16 @@ const HeroSection = () => {
                 px: 4,
                 py: 1.5,
                 fontSize: "1rem",
-                borderColor: "#F5F5F5",
-                color: "#F5F5F5",
+                borderColor: "#F7941D",
+                color: "#F7941D",
                 boxShadow: 3,
+                fontWeight: 700,
+                letterSpacing: 1,
+                textTransform: "uppercase",
                 "&:hover": {
-                  borderColor: "#F5F5F5",
-                  backgroundColor: "rgba(255, 255, 255, 0.1)",
+                  borderColor: "#F7941D",
+                  backgroundColor: "rgba(247, 148, 29, 0.08)",
+                  color: "#F7941D",
                   boxShadow: 6,
                   transform: "translateY(-4px)",
                 },
