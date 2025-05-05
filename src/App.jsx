@@ -1,4 +1,3 @@
-
 import './App.css'
 import React from "react";
 import Header from "./components/Header";
@@ -7,6 +6,7 @@ import Home from "./pages/Home";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ProductsPage from './pages/ProductsPage';
 import AdminPanel from './pages/AdminPanel';
+import Contact from './pages/Contact';
 
 const App = () => {
   return (
@@ -16,6 +16,7 @@ const App = () => {
         <Route path="/" element={<Home />} />        
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/admin" element={<AdminPanel />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
       <Footer />
     </Router>

@@ -28,7 +28,7 @@ import {
 import { Link } from "react-router-dom";
 
 const pages = ["Ana Sayfa", "Kurumsal", "Ürünler", "İletişim"];
-const hrefs = ["/", "yok", "/products", "yok"];
+const hrefs = ["/", "yok", "/products", "/contact"];
 const corporateMenu = [
   "Hakkımızda",
   "Tarihçe",
