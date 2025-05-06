@@ -27,32 +27,26 @@ import {
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
-const pages = ["Ana Sayfa", "Kurumsal", "Ürünler", "İletişim"];
-const hrefs = ["/", "yok", "/products", "yok"];
-const corporateMenu = [
-  "Hakkımızda",
-  "Tarihçe",
-  "Sertifikalar",
-  "Sosyal Sorumluluk",
-  "Karbon Ayak İzi",
-  "Kalite",
-  "AR-GE",
+const pages = [
+  { label: "Ana Sayfa", href: "/" },
+  { label: "Kurumsal", href: "yok" },
+  { label: "Ürünler", href: "/products" },
+  { label: "İletişim", href: "/contact" },
 ];
-const corporateHrefs = [
-  "/about",
-  "/history",
-  "/certificates",
-  "/social-responsibility",
-  "/carbon-footprint",
-  "/quality",
-  "/research-development",
+const corporateMenu = [
+  { label: "Hakkımızda", href: "/about" },
+  { label: "Tarihçe", href: "/history" },
+  { label: "Sertifikalar", href: "/certificates" },
+  { label: "Sosyal Sorumluluk", href: "/social-responsibility" },
+  { label: "Karbon Ayak İzi", href: "/carbon-footprint" },
+  { label: "Kalite", href: "/quality" },
+  { label: "AR-GE", href: "/research-development" },
 ];
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [anchorElCorporate, setAnchorElCorporate] = useState(null);
   const [openCorporateMenu, setOpenCorporateMenu] = useState(false);
-
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -63,30 +57,29 @@ const Header = () => {
       setAnchorElCorporate(event.currentTarget);
     }
   };
-
   const handleCloseCorporateMenu = () => {
     setAnchorElCorporate(null);
     setOpenCorporateMenu(false);
   };
-
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
     setOpenCorporateMenu(false);
   };
 
+  // Drawer for mobile
   const drawer = (
     <Box
       sx={{
-        textAlign: "center",
-        backgroundColor: "#f7941d",
+        width: 260,
+        backgroundColor: "#1e2a38",
         height: "100%",
-        color: "white",
+        color: "#fff",
         p: 2,
-        borderRadius: "0 16px 16px 0",
+        borderRadius: "0 24px 24px 0",
       }}
     >
-      <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", mb: 2 }}>
-        <ElectricBolt sx={{ color: "white", mr: 1 }} />
+      <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+        <ElectricBolt sx={{ color: "#f7941d", mr: 1 }} />
         <Typography
           variant="h6"
           noWrap
@@ -95,78 +88,112 @@ const Header = () => {
           sx={{
             fontFamily: "monospace",
             fontWeight: 700,
-            color: "white",
+            color: "#fff",
             textDecoration: "none",
+            letterSpacing: 2,
+            fontSize: "1.3rem",
+            textTransform: "uppercase",
           }}
         >
           EMI ELEKTRIK
         </Typography>
       </Box>
       <List>
-        {pages.map((page, index) => (
-          <Box key={page}>
-            {page !== "Kurumsal" ? (
+        {pages.map((page, index) =>
+          page.label !== "Kurumsal" ? (
+            <ListItem key={page.label} disablePadding>
+              <ListItemButton
+                component={page.href !== "yok" ? Link : "button"}
+                to={page.href !== "yok" ? page.href : undefined}
+                onClick={handleDrawerToggle}
+                sx={{
+                  borderRadius: "12px",
+                  mx: 1,
+                  my: 0.5,
+                  fontWeight: 600,
+                  fontSize: "1.08rem",
+                  letterSpacing: 1,
+                  color: "#fff",
+                  textTransform: "uppercase",
+                  justifyContent: "center",
+                  "&:hover": { backgroundColor: "#f7941d", color: "#fff" },
+                }}
+              >
+                <ListItemText primary={page.label} />
+              </ListItemButton>
+            </ListItem>
+          ) : (
+            <>
               <ListItem disablePadding>
                 <ListItemButton
-                  component={hrefs[index] !== "yok" ? Link : "button"}
-                  to={hrefs[index] !== "yok" ? hrefs[index] : undefined}
-                  onClick={handleDrawerToggle}
+                  onClick={handleOpenCorporateMenu}
                   sx={{
-                    textAlign: "center",
-                    borderRadius: "30px",
+                    borderRadius: "12px",
                     mx: 1,
                     my: 0.5,
-                    "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
+                    fontWeight: 600,
+                    fontSize: "1.08rem",
+                    letterSpacing: 1,
+                    color: "#fff",
+                    textTransform: "uppercase",
+                    justifyContent: "center",
+                    "&:hover": { backgroundColor: "#f7941d", color: "#fff" },
                   }}
                 >
-                  <ListItemText primary={page} />
+                  <ListItemText primary={page.label} />
+                  {openCorporateMenu ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
               </ListItem>
-            ) : (
-              <>
-                <ListItem disablePadding>
-                  <ListItemButton
-                    onClick={handleOpenCorporateMenu}
-                    sx={{
-                      textAlign: "center",
-                      borderRadius: "30px",
-                      mx: 1,
-                      my: 0.5,
-                      "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
-                    }}
-                  >
-                    <ListItemText primary={page} />
-                    {openCorporateMenu ? <ExpandLess /> : <ExpandMore />}
-                  </ListItemButton>
-                </ListItem>
-                <Collapse in={openCorporateMenu} timeout="auto" unmountOnExit>
-                  <List component="div" disablePadding>
-                    {corporateMenu.map((item, idx) => (
-                      <ListItem key={item} disablePadding>
-                        <ListItemButton
-                          component={Link}
-                          to={corporateHrefs[idx]}
-                          onClick={handleDrawerToggle}
-                          sx={{
-                            pl: 4,
-                            textAlign: "center",
-                            borderRadius: "30px",
-                            mx: 1,
-                            my: 0.5,
-                            "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
-                          }}
-                        >
-                          <ListItemText primary={item} />
-                        </ListItemButton>
-                      </ListItem>
-                    ))}
-                  </List>
-                </Collapse>
-              </>
-            )}
-          </Box>
-        ))}
+              <Collapse in={openCorporateMenu} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                  {corporateMenu.map((item) => (
+                    <ListItem key={item.label} disablePadding>
+                      <ListItemButton
+                        component={Link}
+                        to={item.href}
+                        onClick={handleDrawerToggle}
+                        sx={{
+                          pl: 4,
+                          borderRadius: "12px",
+                          color: "#fff",
+                          fontWeight: 600,
+                          fontSize: "1.08rem",
+                          letterSpacing: 1,
+                          textTransform: "uppercase",
+                          justifyContent: "center",
+                          "&:hover": { backgroundColor: "#f7941d", color: "#fff" },
+                        }}
+                      >
+                        <ListItemText primary={item.label} />
+                      </ListItemButton>
+                    </ListItem>
+                  ))}
+                </List>
+              </Collapse>
+            </>
+          )
+        )}
       </List>
+      <Button
+        href="/iletisim"
+        variant="contained"
+        fullWidth
+        sx={{
+          mt: 3,
+          background: "#f7941d",
+          color: "#fff",
+          borderRadius: "9999px",
+          fontWeight: 700,
+          fontSize: "1.08rem",
+          letterSpacing: 1,
+          textTransform: "uppercase",
+          py: 1.2,
+          boxShadow: 2,
+          "&:hover": { background: "#fff", color: "#f7941d" },
+        }}
+      >
+        Teklif Al
+      </Button>
     </Box>
   );
 
@@ -174,40 +201,166 @@ const Header = () => {
     <AppBar
       position="sticky"
       sx={{
-        backgroundColor: "#f7941d",
-        color: "white",
+        backgroundColor: "#1e2a38",
+        color: "#fff",
         boxShadow: 3,
-        borderRadius: { xs: 0, md: "0 0 24px 24px" }, // Oval alt köşeler
+        borderRadius: { xs: 0, md: "18px" },
         mx: { xs: 0, md: 2 },
-        mt: { xs: 0, md: 1 },
+        mt: { xs: 0, md: 2 },
+        my: { xs: 0, md: 2 },
+        px: { xs: 0, md: 2 },
       }}
     >
       <Container maxWidth="lg">
-        <Toolbar disableGutters>
-          <ElectricBolt sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component={Link}
-            to="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              color: "white",
-              textDecoration: "none",
-            }}
-          >
-            EMI ELEKTRIK
-          </Typography>
+        <Toolbar disableGutters sx={{ minHeight: { xs: 56, md: 72 }, px: { xs: 1, md: 3 } }}>
+          {/* Sol: Logo */}
+          <Box sx={{ display: "flex", alignItems: "center", flexGrow: { xs: 1, md: 0 } }}>
+            <ElectricBolt sx={{ mr: 1, color: "#f7941d", fontSize: 32 }} />
+            <Typography
+              variant="h5"
+              noWrap
+              component={Link}
+              to="/"
+              sx={{
+                fontFamily: "monospace",
+                fontWeight: 700,
+                color: "#fff",
+                textDecoration: "none",
+                letterSpacing: 2,
+                fontSize: "1.5rem",
+                textTransform: "uppercase",
+              }}
+            >
+              EMI ELEKTRIK
+            </Typography>
+          </Box>
 
-          {/* Mobil menü */}
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          {/* Orta: Menü */}
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, justifyContent: "center" }}>
+            {pages.map((page, index) =>
+              page.label !== "Kurumsal" ? (
+                <Button
+                  key={page.label}
+                  component={page.href !== "yok" ? Link : "button"}
+                  to={page.href !== "yok" ? page.href : undefined}
+                  onClick={handleCloseCorporateMenu}
+                  sx={{
+                    mx: 1.5,
+                    px: 3,
+                    color: "#fff",
+                    borderRadius: "10px",
+                    textTransform: "uppercase",
+                    fontWeight: 600,
+                    fontSize: "1.08rem",
+                    letterSpacing: 1,
+                    transition: "background 0.2s, color 0.2s",
+                    "&:hover": {
+                      backgroundColor: "#f7941d",
+                      color: "#1e2a38",
+                    },
+                  }}
+                >
+                  {page.label}
+                </Button>
+              ) : (
+                <Box key={page.label} sx={{ position: "relative" }}>
+                  <Button
+                    onClick={handleOpenCorporateMenu}
+                    endIcon={<ArrowDropDown />}
+                    sx={{
+                      mx: 1.5,
+                      px: 3,
+                      color: "#fff",
+                      borderRadius: "10px",
+                      textTransform: "uppercase",
+                      fontWeight: 600,
+                      fontSize: "1.08rem",
+                      letterSpacing: 1,
+                      transition: "background 0.2s, color 0.2s",
+                      "&:hover": {
+                        backgroundColor: "#f7941d",
+                        color: "#1e2a38",
+                      },
+                    }}
+                  >
+                    {page.label}
+                  </Button>
+                  <Menu
+                    id="menu-corporate"
+                    anchorEl={anchorElCorporate}
+                    anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+                    transformOrigin={{ vertical: "top", horizontal: "left" }}
+                    open={Boolean(anchorElCorporate)}
+                    onClose={handleCloseCorporateMenu}
+                    sx={{
+                      "& .MuiPaper-root": {
+                        backgroundColor: "#fff",
+                        color: "#1e2a38",
+                        borderRadius: "16px",
+                        minWidth: 180,
+                        fontWeight: 600,
+                      },
+                    }}
+                  >
+                    {corporateMenu.map((item) => (
+                      <MenuItem
+                        key={item.label}
+                        component={Link}
+                        to={item.href}
+                        onClick={handleCloseCorporateMenu}
+                        sx={{
+                          borderRadius: "10px",
+                          color: "#1e2a38",
+                          fontWeight: 600,
+                          fontSize: "1.08rem",
+                          letterSpacing: 1,
+                          textTransform: "uppercase",
+                          "&:hover": {
+                            backgroundColor: "#f7941d",
+                            color: "#fff",
+                          },
+                        }}
+                      >
+                        <Typography textAlign="center">{item.label}</Typography>
+                      </MenuItem>
+                    ))}
+                  </Menu>
+                </Box>
+              )
+            )}
+          </Box>
+
+          {/* Sağ: Teklif Al butonu */}
+          <Box sx={{ display: { xs: "none", md: "flex" }, alignItems: "center", ml: 2 }}>
+            <Button
+              href="/iletisim"
+              variant="contained"
+              sx={{
+                background: "#f7941d",
+                color: "#fff",
+                borderRadius: "9999px",
+                fontWeight: 700,
+                fontSize: "1.08rem",
+                letterSpacing: 1,
+                textTransform: "uppercase",
+                px: 4,
+                py: 1.2,
+                boxShadow: 2,
+                transition: "background 0.2s, color 0.2s",
+                "&:hover": { background: "#fff", color: "#f7941d" },
+              }}
+            >
+              Teklif Al
+            </Button>
+          </Box>
+
+          {/* Mobil: Hamburger */}
+          <Box sx={{ flexGrow: 0, display: { xs: "flex", md: "none" }, ml: 1 }}>
             <IconButton
               size="large"
               onClick={handleDrawerToggle}
               color="inherit"
+              sx={{ color: "#fff" }}
             >
               <MenuIcon />
             </IconButton>
@@ -221,113 +374,14 @@ const Header = () => {
                 "& .MuiDrawer-paper": {
                   boxSizing: "border-box",
                   width: 260,
-                  backgroundColor: "#f7941d",
-                  borderRadius: "0 16px 16px 0",
+                  backgroundColor: "#1e2a38",
+                  borderRadius: "0 24px 24px 0",
                   m: 1,
                 },
               }}
             >
               {drawer}
             </Drawer>
-          </Box>
-
-          {/* Mobil logo */}
-          <ElectricBolt sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component={Link}
-            to="/"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              color: "white",
-              textDecoration: "none",
-            }}
-          >
-            ELEKTRIK
-          </Typography>
-
-          {/* Masaüstü menü */}
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, justifyContent: "center" }}>
-            {pages.map((page, index) =>
-              page !== "Kurumsal" ? (
-                <Button
-                  key={page}
-                  component={hrefs[index] !== "yok" ? Link : "button"}
-                  to={hrefs[index] !== "yok" ? hrefs[index] : undefined}
-                  onClick={handleCloseCorporateMenu}
-                  sx={{
-                    my: 2,
-                    mx: 1,
-                    px: 3,
-                    color: "white",
-                    borderRadius: "30px",
-                    textTransform: "none",
-                    "&:hover": {
-                      backgroundColor: "rgba(255, 255, 255, 0.1)",
-                    },
-                  }}
-                >
-                  {page}
-                </Button>
-              ) : (
-                <Box key={page} sx={{ position: "relative" }}>
-                  <Button
-                    onClick={handleOpenCorporateMenu}
-                    endIcon={<ArrowDropDown />}
-                    sx={{
-                      my: 2,
-                      mx: 1,
-                      px: 3,
-                      color: "white",
-                      borderRadius: "30px",
-                      textTransform: "none",
-                      "&:hover": {
-                        backgroundColor: "rgba(255, 255, 255, 0.1)",
-                      },
-                    }}
-                  >
-                    {page}
-                  </Button>
-                  <Menu
-                    id="menu-corporate"
-                    anchorEl={anchorElCorporate}
-                    anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-                    transformOrigin={{ vertical: "top", horizontal: "left" }}
-                    open={Boolean(anchorElCorporate)}
-                    onClose={handleCloseCorporateMenu}
-                    sx={{
-                      "& .MuiPaper-root": {
-                        backgroundColor: "#1e2a38",
-                        color: "white",
-                        borderRadius: "16px",
-                      },
-                    }}
-                  >
-                    {corporateMenu.map((item, idx) => (
-                      <MenuItem
-                        key={item}
-                        component={Link}
-                        to={corporateHrefs[idx]}
-                        onClick={handleCloseCorporateMenu}
-                        sx={{
-                          borderRadius: "30px",
-                          "&:hover": {
-                            backgroundColor: "rgba(255, 255, 255, 0.1)",
-                          },
-                        }}
-                      >
-                        <Typography textAlign="center">{item}</Typography>
-                      </MenuItem>
-                    ))}
-                  </Menu>
-                </Box>
-              )
-            )}
           </Box>
         </Toolbar>
       </Container>
