@@ -39,6 +39,7 @@ const AboutSection = () => {
 
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 10 }}>
         <Grid container spacing={6} alignItems="center">                  
+
           {/* Right side - Content */}
           <Grid item xs={12} lg={6}>
             <Box
@@ -50,8 +51,10 @@ const AboutSection = () => {
                 bgcolor: "rgba(30, 42, 56, 0.1)",
                 color: "#F7941D",
                 borderRadius: "9999px",
-                fontSize: "0.875rem",
-                fontWeight: 600,
+                fontSize: { xs: "1.2rem", md: "1.5rem", lg: "2rem" },
+                fontWeight: 700,
+                letterSpacing: 2,
+                textTransform: "uppercase",
               }}
             >
               HAKKIMIZDA
@@ -59,11 +62,13 @@ const AboutSection = () => {
             <Typography
               variant="h3"
               sx={{
-                fontSize: { xs: "1.75rem", md: "2.25rem", lg: "2.5rem" },
+                fontSize: { xs: "2.2rem", md: "2.5rem", lg: "3rem" },
                 fontWeight: 700,
                 mb: 2,
                 color: "#1E2A38",
                 lineHeight: 1.2,
+                letterSpacing: 2,
+                textTransform: "uppercase",
               }}
             >
               Elektrik Sektöründe{" "}

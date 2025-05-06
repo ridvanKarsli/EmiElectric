@@ -12,6 +12,7 @@ import {
 } from "@mui/material"
 import { Facebook, Twitter, Instagram, LinkedIn, ElectricBolt } from "@mui/icons-material"
 
+
 const Footer = () => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down("md"))
@@ -32,12 +33,11 @@ const Footer = () => {
             <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
               <ElectricBolt sx={{ mr: 1, fontSize: 30, color: "#f7941d" }} />
               <Typography variant="h5" component="div" sx={{ fontWeight: "bold", color: "#f7941d" }}>
-                ELEKTRIK
+                EMI ELEKTRIK
               </Typography>
             </Box>
             <Typography variant="body2" sx={{ mb: 2 }}>
-              Profesyonel elektrik çözümleri sunan firmamız, 20 yılı aşkın deneyimi ile sektörde lider konumdadır.
-              Müşteri memnuniyeti ve kaliteli hizmet anlayışımızla her zaman yanınızdayız.
+              Profesyonel elektrik çözümleri sunan firmamız, 20 yılı aşkın deneyimi ile sektörde lider konumdadır. Müşteri memnuniyeti ve kaliteli hizmet anlayışımızla her zaman yanınızdayız.
             </Typography>
             <Box sx={{ display: "flex", gap: 1 }}>
               {[Facebook, Twitter, Instagram, LinkedIn].map((Icon, index) => (
