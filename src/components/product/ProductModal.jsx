@@ -40,7 +40,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
 import InfoIcon from "@mui/icons-material/Info"
 import CheckCircleIcon from "@mui/icons-material/CheckCircle"
 
-// Özel tema oluşturma
+// Custom theme creation
 const theme = createTheme({
   palette: {
     primary: {
@@ -85,7 +85,7 @@ const theme = createTheme({
     MuiDialog: {
       styleOverrides: {
         paper: {
-          borderRadius: 12,
+          borderRadius: 16,
           overflow: "hidden",
         },
       },
@@ -156,7 +156,7 @@ const ProductModal = ({ product, open, onClose, onDownloadClick }) => {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            py: 2,
+            py: 2.5,
           }}
         >
           <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -175,27 +175,27 @@ const ProductModal = ({ product, open, onClose, onDownloadClick }) => {
             {/* Left side - Images */}
             <Box
               sx={{
-                width: { xs: "100%", md: "45%" },
+                width: { xs: "100%", md: "50%" }, // Increased from 45% to 50%
                 bgcolor: "#f5f5f5",
-                p: 3,
+                p: 4, // Increased padding
                 display: "flex",
                 flexDirection: "column",
               }}
             >
               {/* Main Image */}
-              <Box sx={{ position: "relative", mb: 2 }}>
+              <Box sx={{ position: "relative", mb: 3 }}>
                 <Fade in={true} key={currentImage}>
                   <CardMedia
                     component="img"
-                    src={images[currentImage] || "/placeholder.svg?height=600&width=800"}
+                    src={images[currentImage] || "/placeholder.svg?height=800&width=1000"}
                     alt={product.name}
                     sx={{
                       width: "100%",
-                      height: { xs: 250, md: 350 },
+                      height: { xs: 300, md: 450 }, // Increased from 250/350 to 300/450
                       objectFit: "cover",
-                      borderRadius: 2,
-                      boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-                      border: "3px solid white",
+                      borderRadius: 3, // Increased border radius
+                      boxShadow: "0 8px 24px rgba(0,0,0,0.15)", // Enhanced shadow
+                      border: "4px solid white", // Thicker border
                     }}
                   />
                 </Fade>
@@ -206,7 +206,7 @@ const ProductModal = ({ product, open, onClose, onDownloadClick }) => {
                       onClick={handlePrevImage}
                       sx={{
                         position: "absolute",
-                        left: 8,
+                        left: 16,
                         top: "50%",
                         transform: "translateY(-50%)",
                         backgroundColor: "rgba(255,255,255,0.8)",
@@ -214,16 +214,17 @@ const ProductModal = ({ product, open, onClose, onDownloadClick }) => {
                           backgroundColor: "#f7941d",
                           color: "white",
                         },
+                        size: "large", // Larger button
                       }}
                     >
-                      <ArrowBackIosNewIcon />
+                      <ArrowBackIosNewIcon fontSize="medium" />
                     </IconButton>
 
                     <IconButton
                       onClick={handleNextImage}
                       sx={{
                         position: "absolute",
-                        right: 8,
+                        right: 16,
                         top: "50%",
                         transform: "translateY(-50%)",
                         backgroundColor: "rgba(255,255,255,0.8)",
@@ -231,9 +232,10 @@ const ProductModal = ({ product, open, onClose, onDownloadClick }) => {
                           backgroundColor: "#f7941d",
                           color: "white",
                         },
+                        size: "large", // Larger button
                       }}
                     >
-                      <ArrowForwardIosIcon />
+                      <ArrowForwardIosIcon fontSize="medium" />
                     </IconButton>
                   </>
                 )}
@@ -241,7 +243,9 @@ const ProductModal = ({ product, open, onClose, onDownloadClick }) => {
 
               {/* Thumbnails */}
               {images.length > 1 && (
-                <Grid container spacing={1} sx={{ mt: 1 }}>
+                <Grid container spacing={2} sx={{ mt: 2 }}>
+                  {" "}
+                  {/* Increased spacing */}
                   {images.map((img, index) => (
                     <Grid item xs={3} key={index}>
                       <Box
@@ -251,11 +255,11 @@ const ProductModal = ({ product, open, onClose, onDownloadClick }) => {
                         onClick={() => handleThumbnailClick(index)}
                         sx={{
                           width: "100%",
-                          height: 60,
+                          height: 80, // Increased from 60 to 80
                           objectFit: "cover",
-                          borderRadius: 1,
+                          borderRadius: 2, // Increased border radius
                           cursor: "pointer",
-                          border: index === currentImage ? "2px solid #f7941d" : "2px solid transparent",
+                          border: index === currentImage ? "3px solid #f7941d" : "3px solid transparent", // Thicker border
                           opacity: index === currentImage ? 1 : 0.7,
                           transition: "all 0.2s ease",
                           "&:hover": {
@@ -270,11 +274,15 @@ const ProductModal = ({ product, open, onClose, onDownloadClick }) => {
               )}
 
               {/* Product Features */}
-              <Box sx={{ width: "100%", mt: 3 }}>
-                <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 1.5, color: "#1e2a38" }}>
+              <Box sx={{ width: "100%", mt: 4 }}>
+                {" "}
+                {/* Increased margin */}
+                <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 2, color: "#1e2a38", fontSize: "1.1rem" }}>
                   Ürün Özellikleri
                 </Typography>
-                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1.5 }}>
+                  {" "}
+                  {/* Increased gap */}
                   {product.features && product.features.length > 0 ? (
                     product.features.map((feat) => (
                       <Chip
@@ -286,6 +294,8 @@ const ProductModal = ({ product, open, onClose, onDownloadClick }) => {
                           color: "#1e2a38",
                           border: "1px solid #f7941d",
                           fontWeight: 500,
+                          fontSize: "0.9rem", // Increased font size
+                          py: 2.5, // Increased padding
                           "&:hover": {
                             backgroundColor: "#f7941d",
                             color: "white",
@@ -309,7 +319,9 @@ const ProductModal = ({ product, open, onClose, onDownloadClick }) => {
             </Box>
 
             {/* Right side - Content */}
-            <Box sx={{ flex: 1, p: 3 }}>
+            <Box sx={{ flex: 1, p: 4 }}>
+              {" "}
+              {/* Increased padding */}
               <Tabs
                 value={tab}
                 onChange={handleTabChange}
@@ -318,10 +330,10 @@ const ProductModal = ({ product, open, onClose, onDownloadClick }) => {
                 sx={{
                   borderBottom: 1,
                   borderColor: "divider",
-                  mb: 3,
+                  mb: 4, // Increased margin
                   "& .MuiTabs-indicator": {
-                    height: 3,
-                    borderRadius: 1.5,
+                    height: 4, // Thicker indicator
+                    borderRadius: 2,
                   },
                 }}
               >
@@ -329,7 +341,6 @@ const ProductModal = ({ product, open, onClose, onDownloadClick }) => {
                 <Tab label="Dokümanlar" />
                 <Tab label="Ürün Bilgisi" />
               </Tabs>
-
               {/* Tab 1 - Teknik Veri */}
               {tab === 0 && (
                 <>
@@ -337,9 +348,9 @@ const ProductModal = ({ product, open, onClose, onDownloadClick }) => {
                     <TableContainer
                       component={Paper}
                       sx={{
-                        boxShadow: "none",
+                        boxShadow: "0 4px 12px rgba(0,0,0,0.08)", // Added shadow
                         border: "1px solid #eee",
-                        borderRadius: 2,
+                        borderRadius: 3, // Increased border radius
                         overflow: "hidden",
                       }}
                     >
@@ -353,18 +364,21 @@ const ProductModal = ({ product, open, onClose, onDownloadClick }) => {
                         <TableBody>
                           {product.technicalData.map((row) => (
                             <TableRow key={row.label} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-                              <TableCell component="th" scope="row" sx={{ fontWeight: 500 }}>
+                              <TableCell component="th" scope="row" sx={{ fontWeight: 500, fontSize: "1rem" }}>
                                 {row.label}
                               </TableCell>
-                              <TableCell>{row.value}</TableCell>
+                              <TableCell sx={{ fontSize: "1rem" }}>{row.value}</TableCell>
                             </TableRow>
                           ))}
                         </TableBody>
                       </Table>
                     </TableContainer>
                   ) : (
-                    <Box sx={{ p: 4, textAlign: "center" }}>
-                      <InfoIcon sx={{ fontSize: 48, color: "text.secondary", mb: 2, opacity: 0.5 }} />
+                    <Box sx={{ p: 5, textAlign: "center" }}>
+                      {" "}
+                      {/* Increased padding */}
+                      <InfoIcon sx={{ fontSize: 60, color: "text.secondary", mb: 3, opacity: 0.5 }} />{" "}
+                      {/* Larger icon */}
                       <Typography variant="h6" color="text.secondary">
                         Teknik veri bulunmamaktadır
                       </Typography>
@@ -375,16 +389,20 @@ const ProductModal = ({ product, open, onClose, onDownloadClick }) => {
                   )}
                 </>
               )}
-
               {/* Tab 2 - Dokümanlar */}
               {tab === 1 && (
-                <Box sx={{ p: 2 }}>
-                  <Typography variant="subtitle1" sx={{ mb: 3, color: "#666" }}>
+                <Box sx={{ p: 3 }}>
+                  {" "}
+                  {/* Increased padding */}
+                  <Typography variant="subtitle1" sx={{ mb: 4, color: "#666", fontSize: "1.05rem" }}>
+                    {" "}
+                    {/* Increased margin and font size */}
                     Ürün ile ilgili teknik dokümanları indirebilirsiniz. İndirmek için lütfen aşağıdaki butonlara
                     tıklayınız.
                   </Typography>
-
-                  <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, gap: 2 }}>
+                  <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, gap: 3 }}>
+                    {" "}
+                    {/* Increased gap */}
                     <Button
                       variant="contained"
                       startIcon={<PictureAsPdfIcon />}
@@ -392,19 +410,19 @@ const ProductModal = ({ product, open, onClose, onDownloadClick }) => {
                       sx={{
                         backgroundColor: "#f7941d",
                         color: "white",
-                        py: 1.5,
-                        px: 3,
+                        py: 2, // Increased padding
+                        px: 4, // Increased padding
+                        fontSize: "1rem", // Increased font size
                         "&:hover": {
                           backgroundColor: "#e67e00",
-                          transform: "translateY(-2px)",
-                          boxShadow: "0 4px 12px rgba(247, 148, 29, 0.3)",
+                          transform: "translateY(-3px)", // More pronounced hover effect
+                          boxShadow: "0 8px 16px rgba(247, 148, 29, 0.3)",
                         },
                         transition: "all 0.3s ease",
                       }}
                     >
                       Teknik Veri Sayfası (TDS)
                     </Button>
-
                     <Button
                       variant="outlined"
                       startIcon={<DescriptionIcon />}
@@ -412,13 +430,14 @@ const ProductModal = ({ product, open, onClose, onDownloadClick }) => {
                       sx={{
                         borderColor: "#1e2a38",
                         color: "#1e2a38",
-                        py: 1.5,
-                        px: 3,
+                        py: 2, // Increased padding
+                        px: 4, // Increased padding
+                        fontSize: "1rem", // Increased font size
                         "&:hover": {
                           borderColor: "#f7941d",
                           color: "#f7941d",
                           backgroundColor: "rgba(247, 148, 29, 0.05)",
-                          transform: "translateY(-2px)",
+                          transform: "translateY(-3px)", // More pronounced hover effect
                         },
                         transition: "all 0.3s ease",
                       }}
@@ -426,50 +445,69 @@ const ProductModal = ({ product, open, onClose, onDownloadClick }) => {
                       Teknik Çizim
                     </Button>
                   </Box>
-
-                  <Box sx={{ mt: 4, p: 3, bgcolor: "#f5f5f5", borderRadius: 2, border: "1px dashed #ccc" }}>
-                    <Typography variant="body2" sx={{ color: "#666", display: "flex", alignItems: "center" }}>
-                      <DownloadIcon sx={{ mr: 1.5, fontSize: 20, color: "#f7941d" }} />
+                  <Box sx={{ mt: 5, p: 4, bgcolor: "#f5f5f5", borderRadius: 3, border: "1px dashed #ccc" }}>
+                    {" "}
+                    {/* Increased margin, padding, and border radius */}
+                    <Typography
+                      variant="body2"
+                      sx={{ color: "#666", display: "flex", alignItems: "center", fontSize: "0.95rem" }}
+                    >
+                      {" "}
+                      {/* Increased font size */}
+                      <DownloadIcon sx={{ mr: 1.5, fontSize: 24, color: "#f7941d" }} /> {/* Larger icon */}
                       Dokümanları indirmek için form doldurmanız gerekebilir.
                     </Typography>
                   </Box>
                 </Box>
               )}
-
               {/* Tab 3 - Ürün Bilgisi */}
               {tab === 2 && (
-                <Box sx={{ p: 2 }}>
-                  <Typography variant="h6" gutterBottom sx={{ color: "#1e2a38", fontWeight: 600 }}>
+                <Box sx={{ p: 3 }}>
+                  {" "}
+                  {/* Increased padding */}
+                  <Typography variant="h5" gutterBottom sx={{ color: "#1e2a38", fontWeight: 600 }}>
+                    {" "}
+                    {/* Increased from h6 to h5 */}
                     {product.name}
                   </Typography>
-
-                  <Divider sx={{ my: 2 }} />
-
-                  <Typography variant="body1" paragraph>
+                  <Divider sx={{ my: 3 }} /> {/* Increased margin */}
+                  <Typography variant="body1" paragraph sx={{ fontSize: "1.05rem", lineHeight: 1.6 }}>
+                    {" "}
+                    {/* Increased font size and line height */}
                     Bu ürün, EMI Elektrik'in yüksek kalite standartlarında üretilmiştir. Dayanıklı yapısı ve güvenilir
                     performansı ile uzun yıllar sorunsuz kullanım sağlar.
                   </Typography>
-
-                  <Typography variant="body1" paragraph>
+                  <Typography variant="body1" paragraph sx={{ fontSize: "1.05rem", lineHeight: 1.6 }}>
+                    {" "}
+                    {/* Increased font size and line height */}
                     Ürünlerimiz, uluslararası standartlara uygun olarak üretilmekte ve test edilmektedir. Tüm
                     ürünlerimiz 2 yıl garanti kapsamındadır.
                   </Typography>
-
-                  <Box sx={{ bgcolor: "#1e2a38", color: "white", p: 2, borderRadius: 2, mt: 3 }}>
-                    <Typography variant="subtitle1" sx={{ fontWeight: 600, display: "flex", alignItems: "center" }}>
-                      <ElectricBoltIcon sx={{ mr: 1, color: "#f7941d" }} />
+                  <Box sx={{ bgcolor: "#1e2a38", color: "white", p: 4, borderRadius: 3, mt: 4 }}>
+                    {" "}
+                    {/* Increased padding, border radius, and margin */}
+                    <Typography
+                      variant="subtitle1"
+                      sx={{ fontWeight: 600, display: "flex", alignItems: "center", fontSize: "1.1rem" }}
+                    >
+                      {" "}
+                      {/* Increased font size */}
+                      <ElectricBoltIcon sx={{ mr: 1.5, color: "#f7941d", fontSize: 24 }} /> {/* Larger icon */}
                       Teknik Destek
                     </Typography>
-                    <Typography variant="body2" sx={{ mt: 1, opacity: 0.9 }}>
+                    <Typography variant="body2" sx={{ mt: 2, opacity: 0.9, fontSize: "0.95rem", lineHeight: 1.5 }}>
+                      {" "}
+                      {/* Increased margin, font size, and line height */}
                       Ürünlerimiz hakkında daha fazla bilgi almak veya teknik destek için bizimle iletişime
                       geçebilirsiniz.
                     </Typography>
                     <Button
                       variant="contained"
-                      size="small"
+                      size="large" // Changed from small to large
                       sx={{
-                        mt: 2,
+                        mt: 3, // Increased margin
                         bgcolor: "#f7941d",
+                        px: 3, // Increased padding
                         "&:hover": {
                           bgcolor: "#e67e00",
                         },
@@ -485,11 +523,14 @@ const ProductModal = ({ product, open, onClose, onDownloadClick }) => {
           </Box>
         </DialogContent>
 
-        <DialogActions sx={{ p: 2, bgcolor: "#f5f5f5" }}>
+        <DialogActions sx={{ p: 3, bgcolor: "#f5f5f5" }}>
+          {" "}
+          {/* Increased padding */}
           <Button
             onClick={onClose}
             sx={{
               color: "#1e2a38",
+              fontSize: "0.95rem", // Increased font size
               "&:hover": {
                 backgroundColor: "rgba(30, 42, 56, 0.05)",
               },
@@ -497,22 +538,6 @@ const ProductModal = ({ product, open, onClose, onDownloadClick }) => {
           >
             Kapat
           </Button>
-
-          <Tooltip title="Ürün sayfasına git">
-            <Button
-              variant="contained"
-              sx={{
-                backgroundColor: "#f7941d",
-                color: "white",
-                "&:hover": {
-                  backgroundColor: "#e67e00",
-                },
-              }}
-              onClick={() => (window.location.href = `/urunler/${product.id}`)}
-            >
-              Ürün Sayfasına Git
-            </Button>
-          </Tooltip>
         </DialogActions>
       </Dialog>
     </ThemeProvider>

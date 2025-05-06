@@ -1,9 +1,11 @@
+/* Reset ve temel kutu modeli */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Renk paleti değişkenleri */
 :root {
   --primary-color: #f7941d;       /* Turuncu - Logo yazı rengi */
   --secondary-color: #1e2a38;     /* Koyu lacivert - Alt zemin tonu */
@@ -13,21 +15,26 @@
   --success-color: #28a745;
 }
 
+/* Genel gövde stili */
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", "Arial", sans-serif;
   line-height: 1.6;
-  background-color: var(--light-color);
+  background-color: var(--light-color); /* Kırık beyaz zemin */
   color: var(--dark-color);
   margin: 0;
   padding: 0;
   width: 100%;
+  min-height: 100vh;
+  scroll-behavior: smooth;
 }
 
+/* Bağlantılar */
 a {
   text-decoration: none;
   color: var(--primary-color);
 }
 
+/* Kapsayıcı sınıf */
 .container {
   width: 100%;
   max-width: 100%;
@@ -35,12 +42,29 @@ a {
   padding: 0;
 }
 
+/* Bölüm aralıkları */
 .section {
   padding: 60px 0;
 }
 
+/* Responsive uyum */
 @media (max-width: 768px) {
   .section {
     padding: 40px 0;
   }
+}
+
+/* Resimlere duyarlılık */
+img {
+  max-width: 100%;
+  display: block;
+  height: auto;
+}
+
+/* Buton ve form öğeleri için varsayılan görünüm sıfırlama */
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
 }

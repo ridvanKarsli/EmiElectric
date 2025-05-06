@@ -5,26 +5,21 @@ import {
   Container,
   Typography,
   Box,
-  Grid,
   TextField,
   InputAdornment,
-  Breadcrumbs,
-  Link,
   createTheme,
   ThemeProvider,
   useMediaQuery,
+  Pagination,
 } from "@mui/material"
 import SearchIcon from "@mui/icons-material/Search"
-import ElectricBoltIcon from "@mui/icons-material/ElectricBolt"
-import HomeIcon from "@mui/icons-material/Home"
-import NavigateNextIcon from "@mui/icons-material/NavigateNext"
 
 import FilterPanel from '../components/product/FilterPanel';
 import ProductCard from '../components/product/ProductCard';
 import ProductModal from '../components/product/ProductModal';
 import DocumentDownloadForm from '../components/product/DocumentDownloadForm';
 
-// Özel tema oluşturma
+// Custom theme creation
 const theme = createTheme({
   palette: {
     primary: {
@@ -69,15 +64,18 @@ const ProductsPage = () => {
     { id: 4, label: "Aydınlatma", active: false },
     { id: 5, label: "Otomasyon", active: false },
   ])
+  const [page, setPage] = useState(1)
+  const productsPerPage = 6
 
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
 
-  // Örnek ürün verileri
+  // Sample product data with multiple images
   const products = [
     {
       id: 1,
       name: "NYY Kablo 3x2.5mm²",
-      image: "/placeholder.svg?height=600&width=800",
+      image: "/test.png",
+      gallery: ["/test.png", "/test.png", "/test.png"],
       features: ["Bakır İletken", "PVC Kılıf", "Alev Geciktirici", "TSE Belgeli"],
       technicalData: [
         { label: "Kesit", value: "3x2.5mm²" },
@@ -93,7 +91,8 @@ const ProductsPage = () => {
     {
       id: 2,
       name: "Kompakt Şalter 3x63A",
-      image: "/placeholder.svg?height=600&width=800",
+      image: "/test.png",
+      gallery: ["/test.png", "/test.png", "/test.png", "/test.png"],
       features: ["Termik Koruma", "10kA Kesme Kapasitesi", "DIN Ray Montaj", "CE Belgeli"],
       technicalData: [
         { label: "Anma Akımı", value: "63A" },
@@ -109,7 +108,8 @@ const ProductsPage = () => {
     {
       id: 3,
       name: "LED Panel 60x60 40W",
-      image: "/placeholder.svg?height=600&width=800",
+      image: "/test.png",
+      gallery: ["/test.png", "/test.png", "/test.png"],
       features: ["40W Güç", "4000K Renk Sıcaklığı", "3600lm Işık Akısı", "Slim Tasarım"],
       technicalData: [
         { label: "Güç", value: "40W" },
@@ -122,15 +122,67 @@ const ProductsPage = () => {
       drawingFile: "#",
       category: "Aydınlatma",
     },
+    {
+      id: 4,
+      name: "Endüstriyel Sensör",
+      image: "/test.png",
+      gallery: ["/test.png", "/test.png"],
+      features: ["Endüktif", "IP67 Koruma", "PNP Çıkış", "M18 Gövde"],
+      technicalData: [
+        { label: "Tip", value: "Endüktif" },
+        { label: "Koruma Sınıfı", value: "IP67" },
+        { label: "Çıkış Tipi", value: "PNP" },
+        { label: "Gövde", value: "M18" },
+        { label: "Algılama Mesafesi", value: "8mm" },
+      ],
+      tdsFile: "#",
+      drawingFile: "#",
+      category: "Otomasyon",
+    },
+    {
+      id: 5,
+      name: "NHXMH Kablo 5x1.5mm²",
+      image: "/test.png",
+      gallery: ["/test.png", "/test.png", "/test.png"],
+      features: ["Halojen Free", "Bakır İletken", "Alev Geciktirici", "TSE Belgeli"],
+      technicalData: [
+        { label: "Kesit", value: "5x1.5mm²" },
+        { label: "İletken", value: "Bakır" },
+        { label: "Dış Kılıf", value: "HFFR" },
+        { label: "Çalışma Sıcaklığı", value: "-15°C / +70°C" },
+        { label: "Standart", value: "TS EN 50525-3-31" },
+      ],
+      tdsFile: "#",
+      drawingFile: "#",
+      category: "Kablolar",
+    },
+    {
+      id: 6,
+      name: "LED Projektör 100W",
+      image: "/test.png",
+      gallery: ["/test.png", "/test.png"],
+      features: ["100W Güç", "6500K Renk Sıcaklığı", "IP65 Koruma", "Alüminyum Gövde"],
+      technicalData: [
+        { label: "Güç", value: "100W" },
+        { label: "Renk Sıcaklığı", value: "6500K" },
+        { label: "Koruma Sınıfı", value: "IP65" },
+        { label: "Gövde", value: "Alüminyum" },
+        { label: "Ömür", value: "30.000 saat" },
+      ],
+      tdsFile: "#",
+      drawingFile: "#",
+      category: "Aydınlatma",
+    },
   ]
+  
 
-  // Filtreleme ve arama işlemleri
+  // Filtering and search operations
   const filteredProducts = products.filter((product) => {
-    // Kategori filtresi
+    // Category filter
     const activeFilter = filters.find((f) => f.active)
     const categoryMatch = activeFilter.id === 1 || product.category === activeFilter.label
 
-    // Arama filtresi
+    // Search filter
     const searchMatch =
       searchQuery === "" ||
       product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -139,6 +191,12 @@ const ProductsPage = () => {
     return categoryMatch && searchMatch
   })
 
+  // Pagination
+  const indexOfLastProduct = page * productsPerPage
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage
+  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct)
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage)
+
   const handleFilterChange = (filterId) => {
     setFilters(
       filters.map((f) => ({
@@ -146,6 +204,7 @@ const ProductsPage = () => {
         active: f.id === filterId,
       })),
     )
+    setPage(1) // Reset to first page when filter changes
   }
 
   const handleProductClick = (product) => {
@@ -167,62 +226,68 @@ const ProductsPage = () => {
     console.log("Form submitted:", formData)
     console.log("Document:", selectedDocument)
 
-    // Burada form verilerini API'ye gönderme işlemi yapılabilir
+    // Here you can send form data to API
 
-    // Başarılı form gönderimi sonrası doküman indirme işlemi
+    // After successful form submission, download document
     setTimeout(() => {
       setShowDownloadForm(false)
-      // Gerçek bir uygulamada burada doküman indirme işlemi yapılır
+      // In a real application, document download would happen here
     }, 3000)
   }
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value)
+    setPage(1) // Reset to first page when search changes
+  }
+
+  const handlePageChange = (event, value) => {
+    setPage(value)
+    window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
   return (
     <ThemeProvider theme={theme}>
-      <Container maxWidth="lg" sx={{ py: 4 }}>
-        {/* Arama ve Filtreleme */}
-        <Grid container spacing={3} sx={{ mb: 4 }}>
-          <Grid item xs={12} md={8}>
-            <FilterPanel filters={filters} onChange={handleFilterChange} />
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <TextField
-              fullWidth
-              placeholder="Ürün Ara..."
-              variant="outlined"
-              value={searchQuery}
-              onChange={handleSearchChange}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon sx={{ color: "#f7941d" }} />
-                  </InputAdornment>
-                ),
-                sx: {
-                  borderRadius: 2,
-                  bgcolor: "#fff",
-                  "& .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "#f0f0f0",
-                  },
-                  "&:hover .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "#f7941d",
-                  },
-                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "#f7941d",
-                  },
-                },
-              }}
-            />
-          </Grid>
-        </Grid>
+      <Container maxWidth="xl" sx={{ py: 4 }}>
+        {/* Filter Panel */}
+        <Box sx={{ mb: 3 }}>
+          <FilterPanel filters={filters} onChange={handleFilterChange} />
+        </Box>
 
-        {/* Ürün Listesi */}
-        {filteredProducts.length > 0 ? (
+        {/* Search - Now below the filter panel */}
+        <Box sx={{ mb: 4 }}>
+          <TextField
+            fullWidth
+            placeholder="Ürün Ara..."
+            variant="outlined"
+            value={searchQuery}
+            onChange={handleSearchChange}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon sx={{ color: "#f7941d" }} />
+                </InputAdornment>
+              ),
+              sx: {
+                borderRadius: 2,
+                bgcolor: "#fff",
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#f0f0f0",
+                },
+                "&:hover .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#f7941d",
+                },
+                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#f7941d",
+                },
+              },
+            }}
+          />
+        </Box>
+
+        {/* Product List */}
+        {currentProducts.length > 0 ? (
           <Box sx={{ mb: 4 }}>
-            {filteredProducts.map((product, index) => (
+            {currentProducts.map((product, index) => (
               <ProductCard
                 key={product.id}
                 product={product}
@@ -242,7 +307,22 @@ const ProductsPage = () => {
           </Box>
         )}
 
-        {/* Ürün Detay Modalı */}
+        {/* Pagination */}
+        {filteredProducts.length > productsPerPage && (
+          <Box sx={{ display: "flex", justifyContent: "center", mt: 4, mb: 2 }}>
+            <Pagination
+              count={totalPages}
+              page={page}
+              onChange={handlePageChange}
+              color="primary"
+              size={isMobile ? "small" : "medium"}
+              showFirstButton
+              showLastButton
+            />
+          </Box>
+        )}
+
+        {/* Product Detail Modal */}
         {showModal && selectedProduct && (
           <ProductModal
             product={selectedProduct}
@@ -252,7 +332,7 @@ const ProductsPage = () => {
           />
         )}
 
-        {/* Doküman İndirme Formu */}
+        {/* Document Download Form */}
         {showDownloadForm && selectedDocument && (
           <Box
             sx={{
