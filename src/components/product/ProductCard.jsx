@@ -15,6 +15,7 @@ import {
   IconButton,
   Tooltip,
   Badge,
+  useMediaQuery,
 } from "@mui/material"
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward"
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew"
@@ -22,7 +23,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
 import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary"
 import ElectricBoltIcon from "@mui/icons-material/ElectricBolt"
 
-// Özel tema oluşturma
+// Custom theme creation
 const theme = createTheme({
   palette: {
     primary: {
@@ -65,6 +66,7 @@ const theme = createTheme({
 const ProductCard = ({ product, onClick, isReversed = false }) => {
   const [currentImage, setCurrentImage] = useState(0)
   const images = product.gallery || [product.image]
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
 
   const handlePrev = (e) => {
     e.stopPropagation()
@@ -83,25 +85,25 @@ const ProductCard = ({ product, onClick, isReversed = false }) => {
           sx={{
             display: "flex",
             flexDirection: { xs: "column", md: isReversed ? "row-reverse" : "row" },
-            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
-            borderRadius: 3,
+            boxShadow: "0 8px 24px rgba(0, 0, 0, 0.12)",
+            borderRadius: 4,
             overflow: "hidden",
             border: "1px solid rgba(247, 148, 29, 0.3)",
             backgroundColor: "#ffffff",
-            mb: 4,
+            mb: 5, // Increased margin for larger cards
             "&:hover": {
-              transform: "translateY(-4px)",
-              boxShadow: "0 12px 24px rgba(0, 0, 0, 0.12)",
+              transform: "translateY(-6px)",
+              boxShadow: "0 16px 32px rgba(0, 0, 0, 0.15)",
             },
             transition: "all 0.3s ease",
           }}
         >
-          {/* Image with controls */}
+          {/* Image with controls - LARGER */}
           <Box
             sx={{
               position: "relative",
-              width: { xs: "100%", md: 360 },
-              height: { xs: 240, md: 280 },
+              width: { xs: "100%", md: 450 }, // Increased from 360 to 450
+              height: { xs: 300, md: 380 }, // Increased from 240/280 to 300/380
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -115,14 +117,14 @@ const ProductCard = ({ product, onClick, isReversed = false }) => {
                 color="primary"
                 sx={{
                   position: "absolute",
-                  top: 12,
-                  right: 12,
+                  top: 16,
+                  right: 16,
                   zIndex: 2,
                   "& .MuiBadge-badge": {
-                    fontSize: "0.75rem",
-                    height: "22px",
-                    minWidth: "22px",
-                    padding: "0 6px",
+                    fontSize: "0.8rem",
+                    height: "24px",
+                    minWidth: "24px",
+                    padding: "0 8px",
                   },
                 }}
               >
@@ -137,7 +139,7 @@ const ProductCard = ({ product, onClick, isReversed = false }) => {
                     onClick={handlePrev}
                     sx={{
                       position: "absolute",
-                      left: 8,
+                      left: 16,
                       zIndex: 2,
                       backgroundColor: "rgba(255,255,255,0.8)",
                       "&:hover": {
@@ -147,9 +149,9 @@ const ProductCard = ({ product, onClick, isReversed = false }) => {
                       },
                       transition: "all 0.2s ease",
                     }}
-                    size="small"
+                    size="medium" // Increased from small
                   >
-                    <ArrowBackIosNewIcon fontSize="small" />
+                    <ArrowBackIosNewIcon />
                   </IconButton>
                 </Tooltip>
 
@@ -158,7 +160,7 @@ const ProductCard = ({ product, onClick, isReversed = false }) => {
                     onClick={handleNext}
                     sx={{
                       position: "absolute",
-                      right: 8,
+                      right: 16,
                       zIndex: 2,
                       backgroundColor: "rgba(255,255,255,0.8)",
                       "&:hover": {
@@ -168,9 +170,9 @@ const ProductCard = ({ product, onClick, isReversed = false }) => {
                       },
                       transition: "all 0.2s ease",
                     }}
-                    size="small"
+                    size="medium" // Increased from small
                   >
-                    <ArrowForwardIosIcon fontSize="small" />
+                    <ArrowForwardIosIcon />
                   </IconButton>
                 </Tooltip>
               </>
@@ -178,7 +180,7 @@ const ProductCard = ({ product, onClick, isReversed = false }) => {
 
             <CardMedia
               component="img"
-              image={images[currentImage] || "/placeholder.svg?height=600&width=800"}
+              image={images[currentImage] || "/placeholder.svg?height=800&width=1000"}
               alt={product.name}
               sx={{
                 height: "100%",
@@ -196,16 +198,16 @@ const ProductCard = ({ product, onClick, isReversed = false }) => {
           <CardContent
             sx={{
               flex: 1,
-              p: { xs: 3, md: 4 },
+              p: { xs: 3, md: 5 }, // Increased padding
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
             }}
           >
             <Box>
-              <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
-                <ElectricBoltIcon sx={{ color: "#f7941d", mr: 1, fontSize: 20 }} />
-                <Typography variant="subtitle2" color="primary" sx={{ fontWeight: 600 }}>
+              <Box sx={{ display: "flex", alignItems: "center", mb: 1.5 }}>
+                <ElectricBoltIcon sx={{ color: "#f7941d", mr: 1.5, fontSize: 24 }} />
+                <Typography variant="subtitle1" color="primary" sx={{ fontWeight: 600 }}>
                   EMI Elektrik
                 </Typography>
               </Box>
@@ -214,29 +216,34 @@ const ProductCard = ({ product, onClick, isReversed = false }) => {
                 variant="h5"
                 sx={{
                   fontWeight: 700,
-                  mb: 2,
+                  mb: 3, // Increased margin
                   color: "#1e2a38",
-                  fontSize: { xs: "1.25rem", md: "1.5rem" },
+                  fontSize: { xs: "1.35rem", md: "1.7rem" }, // Increased font size
                   display: "-webkit-box",
                   WebkitLineClamp: 2,
                   WebkitBoxOrient: "vertical",
                   overflow: "hidden",
+                  lineHeight: 1.3,
                 }}
               >
                 {product.name}
               </Typography>
 
-              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, mb: 3 }}>
+              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1.5, mb: 4 }}>
+                {" "}
+                {/* Increased margin and gap */}
                 {product.features && product.features.length > 0 ? (
                   product.features.map((feat) => (
                     <Chip
                       key={feat}
                       label={feat}
-                      size="small"
+                      size="medium" // Changed from small to medium
                       sx={{
                         backgroundColor: "#f5f5f5",
                         color: "#1e2a38",
                         fontWeight: 500,
+                        fontSize: "0.9rem", // Increased font size
+                        py: 2.5, // Increased padding
                         "&:hover": {
                           backgroundColor: "#f7941d",
                           color: "white",
@@ -263,14 +270,15 @@ const ProductCard = ({ product, onClick, isReversed = false }) => {
                 color: "white",
                 borderRadius: 8,
                 alignSelf: "flex-start",
-                px: 3,
-                py: 1.2,
+                px: 4, // Increased padding
+                py: 1.5, // Increased padding
+                fontSize: "1rem", // Increased font size
                 "&:hover": {
                   backgroundColor: "#1e2a38",
                   transform: "translateX(5px)",
                 },
                 transition: "all 0.3s ease",
-                boxShadow: "0 4px 8px rgba(247, 148, 29, 0.25)",
+                boxShadow: "0 4px 12px rgba(247, 148, 29, 0.3)",
               }}
             >
               Detayları Gör

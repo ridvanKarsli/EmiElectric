@@ -24,7 +24,7 @@ import PhoneIcon from "@mui/icons-material/Phone"
 import CheckCircleIcon from "@mui/icons-material/CheckCircle"
 import DescriptionIcon from "@mui/icons-material/Description"
 
-// Özel tema oluşturma
+// Custom theme creation
 const theme = createTheme({
   palette: {
     primary: {
@@ -172,31 +172,49 @@ const DocumentDownloadForm = ({ document, onSubmit }) => {
   return (
     <ThemeProvider theme={theme}>
       <Paper
-        elevation={3}
+        elevation={5} // Increased elevation
         sx={{
-          maxWidth: "500px",
+          maxWidth: "550px", // Increased from 500px
           width: "100%",
-          borderRadius: 3,
+          borderRadius: 4, // Increased border radius
           overflow: "hidden",
+          boxShadow: "0 8px 32px rgba(0, 0, 0, 0.15)", // Enhanced shadow
         }}
       >
         <Box sx={{ bgcolor: "#1e2a38", color: "white", p: 3, display: "flex", alignItems: "center" }}>
-          <ElectricBoltIcon sx={{ mr: 1.5, color: "#f7941d" }} />
+          <ElectricBoltIcon sx={{ mr: 1.5, color: "#f7941d", fontSize: 28 }} /> {/* Larger icon */}
           <Typography variant="h6" component="h2" sx={{ fontWeight: 700 }}>
             Doküman İndirme Formu
           </Typography>
         </Box>
 
         {isSuccess ? (
-          <Box sx={{ p: 4, textAlign: "center" }}>
-            <CheckCircleIcon sx={{ fontSize: 60, color: "success.main", mb: 2 }} />
-            <Typography variant="h6" sx={{ mb: 2, fontWeight: 600, color: "success.main" }}>
+          <Box sx={{ p: 5, textAlign: "center" }}>
+            {" "}
+            {/* Increased padding */}
+            <CheckCircleIcon sx={{ fontSize: 70, color: "success.main", mb: 3 }} />{" "}
+            {/* Larger icon and increased margin */}
+            <Typography variant="h5" sx={{ mb: 3, fontWeight: 600, color: "success.main" }}>
+              {" "}
+              {/* Increased from h6 to h5 and increased margin */}
               İşlem Başarılı!
             </Typography>
-            <Typography variant="body1" sx={{ mb: 3 }}>
+            <Typography variant="body1" sx={{ mb: 4, fontSize: "1.1rem" }}>
+              {" "}
+              {/* Increased margin and font size */}
               Doküman indirme bağlantısı e-posta adresinize gönderilmiştir.
             </Typography>
-            <Button variant="outlined" color="primary" onClick={() => setIsSuccess(false)} sx={{ borderRadius: 2 }}>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={() => setIsSuccess(false)}
+              sx={{
+                borderRadius: 2,
+                py: 1.2, // Increased padding
+                px: 4, // Increased padding
+                fontSize: "1rem", // Increased font size
+              }}
+            >
               Tamam
             </Button>
           </Box>
@@ -204,23 +222,34 @@ const DocumentDownloadForm = ({ document, onSubmit }) => {
           <>
             {document && (
               <Box sx={{ p: 3, bgcolor: "#f5f5f5", display: "flex", alignItems: "center" }}>
-                <DescriptionIcon sx={{ mr: 1.5, color: "#f7941d" }} />
+                <DescriptionIcon sx={{ mr: 1.5, color: "#f7941d", fontSize: 28 }} /> {/* Larger icon */}
                 <Box>
-                  <Typography variant="subtitle2" sx={{ fontWeight: 600, color: "#1e2a38" }}>
+                  <Typography variant="subtitle2" sx={{ fontWeight: 600, color: "#1e2a38", fontSize: "0.95rem" }}>
+                    {" "}
+                    {/* Increased font size */}
                     İndirilecek Doküman:
                   </Typography>
-                  <Typography variant="body2">{document.name}</Typography>
+                  <Typography variant="body2" sx={{ fontSize: "0.95rem" }}>
+                    {" "}
+                    {/* Increased font size */}
+                    {document.name}
+                  </Typography>
                 </Box>
               </Box>
             )}
 
-            <Box component="form" onSubmit={handleSubmit} sx={{ p: 3 }}>
-              <Typography variant="body2" sx={{ mb: 3, color: "#666" }}>
+            <Box component="form" onSubmit={handleSubmit} sx={{ p: 4 }}>
+              {" "}
+              {/* Increased padding */}
+              <Typography variant="body2" sx={{ mb: 3, color: "#666", fontSize: "0.95rem" }}>
+                {" "}
+                {/* Increased font size */}
                 Dokümanı indirmek için lütfen aşağıdaki formu doldurunuz. <span style={{ color: "#f7941d" }}>*</span>{" "}
                 ile işaretli alanlar zorunludur.
               </Typography>
-
-              <Box sx={{ display: "flex", flexDirection: "column", gap: 2.5, mb: 3 }}>
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 3, mb: 4 }}>
+                {" "}
+                {/* Increased gap and margin */}
                 <TextField
                   fullWidth
                   label="Ad Soyad *"
@@ -236,9 +265,11 @@ const DocumentDownloadForm = ({ document, onSubmit }) => {
                       </InputAdornment>
                     ),
                   }}
-                  sx={{ "& .MuiOutlinedInput-root": { borderRadius: 2 } }}
+                  sx={{
+                    "& .MuiOutlinedInput-root": { borderRadius: 2 },
+                    "& .MuiInputBase-input": { fontSize: "1rem", py: 1.5 }, // Increased font size and padding
+                  }}
                 />
-
                 <TextField
                   fullWidth
                   label="E-posta *"
@@ -255,9 +286,11 @@ const DocumentDownloadForm = ({ document, onSubmit }) => {
                       </InputAdornment>
                     ),
                   }}
-                  sx={{ "& .MuiOutlinedInput-root": { borderRadius: 2 } }}
+                  sx={{
+                    "& .MuiOutlinedInput-root": { borderRadius: 2 },
+                    "& .MuiInputBase-input": { fontSize: "1rem", py: 1.5 }, // Increased font size and padding
+                  }}
                 />
-
                 <TextField
                   fullWidth
                   label="Şirket"
@@ -271,9 +304,11 @@ const DocumentDownloadForm = ({ document, onSubmit }) => {
                       </InputAdornment>
                     ),
                   }}
-                  sx={{ "& .MuiOutlinedInput-root": { borderRadius: 2 } }}
+                  sx={{
+                    "& .MuiOutlinedInput-root": { borderRadius: 2 },
+                    "& .MuiInputBase-input": { fontSize: "1rem", py: 1.5 }, // Increased font size and padding
+                  }}
                 />
-
                 <TextField
                   fullWidth
                   label="Telefon *"
@@ -289,16 +324,20 @@ const DocumentDownloadForm = ({ document, onSubmit }) => {
                       </InputAdornment>
                     ),
                   }}
-                  sx={{ "& .MuiOutlinedInput-root": { borderRadius: 2 } }}
+                  sx={{
+                    "& .MuiOutlinedInput-root": { borderRadius: 2 },
+                    "& .MuiInputBase-input": { fontSize: "1rem", py: 1.5 }, // Increased font size and padding
+                  }}
                 />
               </Box>
-
               <FormControlLabel
                 control={
                   <Checkbox name="acceptTerms" checked={formData.acceptTerms} onChange={handleChange} color="primary" />
                 }
                 label={
-                  <Typography variant="body2">
+                  <Typography variant="body2" sx={{ fontSize: "0.95rem" }}>
+                    {" "}
+                    {/* Increased font size */}
                     Kişisel verilerimin işlenmesine ilişkin{" "}
                     <Link href="/kullanim-sartlari" color="primary" underline="hover">
                       kullanım şartlarını
@@ -313,23 +352,22 @@ const DocumentDownloadForm = ({ document, onSubmit }) => {
                   {errors.acceptTerms}
                 </Typography>
               )}
-
               {errors.form && (
                 <Alert severity="error" sx={{ mb: 2 }}>
                   {errors.form}
                 </Alert>
               )}
-
               <Button
                 type="submit"
                 variant="contained"
                 fullWidth
                 disabled={isSubmitting}
                 sx={{
-                  mt: 2,
-                  py: 1.5,
+                  mt: 3, // Increased margin
+                  py: 1.8, // Increased padding
                   bgcolor: "#f7941d",
                   borderRadius: 2,
+                  fontSize: "1.05rem", // Increased font size
                   "&:hover": {
                     bgcolor: "#e67e00",
                   },
@@ -337,7 +375,7 @@ const DocumentDownloadForm = ({ document, onSubmit }) => {
               >
                 {isSubmitting ? (
                   <>
-                    <CircularProgress size={24} sx={{ mr: 1, color: "white" }} />
+                    <CircularProgress size={24} sx={{ mr: 1.5, color: "white" }} />
                     İşleniyor...
                   </>
                 ) : (
